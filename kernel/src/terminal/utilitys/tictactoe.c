@@ -66,11 +66,13 @@ void print_field(char field[TICTACTOE_SIZE][TICTACTOE_SIZE])
     }
 }
 
-uint16_t get_tictactoe_field()
+int16_t get_tictactoe_field()
 {
     char input[5];
     memset(input, 0, sizeof(input));
     gets(input, sizeof(input));
+    if (strncmp(input, "q", 1) == 0)
+        return -1;
     return atoi(input);
 }
 
@@ -89,7 +91,11 @@ void tictactoe_start()
         print_field(tictactoe_field);
         vga_puts("Enter a field, Player ", VGA_FG_WHITE | VGA_BG_BLACK);
         vga_puts((player == 0) ? "1: " : "2: ", VGA_FG_WHITE | VGA_BG_BLACK);
-        uint16_t field = get_tictactoe_field();
+        int16_t field = get_tictactoe_field();
+        if (field == -1) {
+            winner = (player == 0) ? 'O' : 'X';
+            break;
+        }
         if ((field > 0) && (field <= TICTACTOE_SIZE*TICTACTOE_SIZE) && (tictactoe_field[(field-1)/TICTACTOE_SIZE][(field-1)%TICTACTOE_SIZE] == '-')) {
             tictactoe_field[(field-1)/TICTACTOE_SIZE][(field-1)%TICTACTOE_SIZE] = (player == 0) ? 'X' : 'O';
             player = !player;
