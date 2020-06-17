@@ -18,5 +18,5 @@ Type `help` or `HELP` in the PracticeOS commandline to receive a list of command
 
 ## Features
 TicTacToe  
-A brainfuck interpreter  
+A [brainfuck](https://en.wikipedia.org/wiki/Brainfuck) interpreter  
 A simple textmode-cursor tool  
