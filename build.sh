@@ -28,4 +28,4 @@ rm -r build/
 rm -rf $(find . -name "*.o")
 
 # uncomment this in case you want to directly boot from the image
-#qemu-system-i386 -drive format=raw,file=practicetOS.img -no-reboot -no-shutdown
+#qemu-system-i386 -drive format=raw,file=practiceOS.img -no-reboot -no-shutdown
