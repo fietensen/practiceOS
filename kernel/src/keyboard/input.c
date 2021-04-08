@@ -5,6 +5,11 @@
  * variable to it and disables itself 
  */
 void _keyboardhandler_getkey(uint8_t scancode, void* options) {
+    // apparently the keyboard sends nullbytes after the input now for some reason
+    // please dont ask me why and dont bully me because of the following "bugfix"
+    if (scancode == 0x00)
+        return;
+
     *(char*)options = scancode;
     updatedInput = 1;
 }
@@ -163,6 +168,7 @@ uint32_t gets(char *buffer, uint32_t n)
         if (updatedInput) {
             updatedInput = 0;
             char c_ascii = scancode_to_ascii(c);
+
             if (c_ascii != 0 && c_ascii != 0x0A && c_ascii != 0x0B) {
                 vga_putc(c_ascii, VGA_FG_GRAY | VGA_BG_BLACK);
                 buffer[i] = c_ascii;
